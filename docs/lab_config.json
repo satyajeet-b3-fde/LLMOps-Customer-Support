@@ -1,0 +1,102 @@
+{
+ "openai": {
+  "endpoint": "https://aoai-llmops-cs-1260.openai.azure.com/",
+  "kind": "OpenAI",
+  "location": "eastus",
+  "name": "aoai-llmops-cs-1260",
+  "sku": "S0"
+ },
+ "deployment": {
+  "capacity": 10,
+  "model": "gpt-5.4-mini",
+  "name": "gpt-support-prod",
+  "sku": "GlobalStandard",
+  "version": "2026-03-17"
+ },
+ "plan": {
+  "linux": null,
+  "location": "East US",
+  "name": "asp-llmops-cs",
+  "sku": "B1",
+  "tier": "Basic"
+ },
+ "webapp": {
+  "host": "llmops-cs-api-1260.azurewebsites.net",
+  "httpsOnly": true,
+  "name": "llmops-cs-api-1260",
+  "runtime": "PYTHON|3.12"
+ },
+ "startup": "gunicorn -w 2 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 --timeout 120 app.main:app",
+ "appi": {
+  "kind": "web",
+  "name": "appi-llmops-cs"
+ },
+ "settings": [
+  "AZURE_OPENAI_ENDPOINT",
+  "AZURE_OPENAI_API_KEY",
+  "AZURE_OPENAI_API_VERSION",
+  "AZURE_OPENAI_DEPLOYMENT",
+  "SCM_DO_BUILD_DURING_DEPLOYMENT",
+  "APPLICATIONINSIGHTS_CONNECTION_STRING",
+  "WEBSITE_HTTPLOGGING_RETENTION_DAYS"
+ ],
+ "scm_basic_auth": true,
+ "kql_traces": [
+  [
+   "2026-11-18T11:40:27.8457Z",
+   "LLM request completed | latency=1.36 | prompt_tokens=52 | completion_tokens=72 | total_tokens=124"
+  ],
+  [
+   "2026-11-18T11:40:06.886693Z",
+   "LLM request completed | latency=3.26 | prompt_tokens=52 | completion_tokens=59 | total_tokens=111"
+  ],
+  [
+   "2026-11-18T11:38:28.426307Z",
+   "LLM request completed | latency=1.63 | prompt_tokens=52 | completion_tokens=94 | total_tokens=146"
+  ]
+ ],
+ "kql_requests": [
+  [
+   "GET /",
+   7,
+   21,
+   77
+  ],
+  [
+   "GET /docs",
+   5,
+   3,
+   7
+  ],
+  [
+   "POST /chat",
+   5,
+   1940,
+   3279
+  ],
+  [
+   "GET /health",
+   4,
+   2,
+   2
+  ],
+  [
+   "GET /openapi.json",
+   4,
+   4,
+   12
+  ],
+  [
+   "GET /favicon.ico",
+   4,
+   3,
+   6
+  ],
+  [
+   "GET /robots933456.txt",
+   1,
+   8,
+   8
+  ]
+ ]
+}
